@@ -203,4 +203,10 @@ public class DaoIntegrationTest {
         Author author = authorDao.findAuthorByNameNative("Craig", "Walls");
         assertThat(author).isNotNull();
     }
+
+    @Test
+    void testGetBookByTitleNative() {
+        Book book = bookDao.findBookByTitleNative("Clean Code");
+        assertThat(book).isNotNull();
+    }
 }
