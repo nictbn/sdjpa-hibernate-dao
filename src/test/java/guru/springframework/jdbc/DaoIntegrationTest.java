@@ -4,6 +4,7 @@ import guru.springframework.jdbc.dao.AuthorDao;
 import guru.springframework.jdbc.dao.BookDao;
 import guru.springframework.jdbc.domain.Author;
 import guru.springframework.jdbc.domain.Book;
+import net.bytebuddy.utility.RandomString;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -158,5 +159,17 @@ public class DaoIntegrationTest {
         List<Author> authors = authorDao.listAuthorsByLastNameLike("Wall");
         assertThat(authors).isNotNull();
         assertThat(authors.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void testFindBookByISBN() {
+        Book book = new Book();
+        book.setIsbn("1234" + RandomString.make());
+        book.setTitle("ISBN TEST");
+
+        Book saved = bookDao.saveNewBook(book);
+
+        Book fetched = bookDao.findByIsbn(book.getIsbn());
+        assertThat(fetched).isNotNull();
     }
 }
