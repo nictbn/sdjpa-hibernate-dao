@@ -18,4 +18,6 @@ public interface BookDao {
     Book findByIsbn(String isbn);
 
     List<Book> findAll();
+
+    Book findBookByTitleCriteria(String title);
 }
