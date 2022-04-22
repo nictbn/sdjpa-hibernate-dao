@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
@@ -85,7 +84,7 @@ public class DaoIntegrationTest {
     }
 
     @Test
-    void testGetBookByName() {
+    void testGetBookByTitle() {
         Book book = bookDao.findBookByTitle("Clean Code");
 
         assertThat(book).isNotNull();
@@ -176,6 +175,13 @@ public class DaoIntegrationTest {
     @Test
     void findAllAuthors() {
         List<Author> authors = authorDao.findAll();
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
+
+    @Test
+    void findAllBooks() {
+        List<Book> authors = bookDao.findAll();
         assertThat(authors).isNotNull();
         assertThat(authors.size()).isGreaterThan(0);
     }
