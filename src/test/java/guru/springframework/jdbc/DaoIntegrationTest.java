@@ -172,4 +172,11 @@ public class DaoIntegrationTest {
         Book fetched = bookDao.findByIsbn(book.getIsbn());
         assertThat(fetched).isNotNull();
     }
+
+    @Test
+    void findAllAuthors() {
+        List<Author> authors = authorDao.findAll();
+        assertThat(authors).isNotNull();
+        assertThat(authors.size()).isGreaterThan(0);
+    }
 }
